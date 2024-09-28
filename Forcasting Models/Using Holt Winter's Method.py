@@ -13,8 +13,8 @@ my_file.index.freq='MS'
 
 # Display the first 10 rows
 print(my_file.head())
-my_file['Thousands'].plot()
-plt.show()
+my_file['Thousands'].plot(label="Original Data")
+# plt.show()
 
 # Extract feature (X)
 X = my_file['Thousands']
@@ -27,11 +27,15 @@ print(X_test.head())
 # plt.show()
 
 # Apply Holt-Winters Exponential Smoothing
-hw_model = ExponentialSmoothing(X_train, trend='add', seasonal='mul', seasonal_periods=12).fit()
+hw_model = ExponentialSmoothing(X_train, trend='mul', seasonal='mul', seasonal_periods=12).fit()
 
 # Print the fitted model
-predictions = hw_model.forecast(5)
+predictions = hw_model.forecast(48)
 print(predictions.head())
+
+X_train.plot()
+predictions.plot(label="Fitted Data",linestyle="--")
+plt.show()
 
 # Plot the fitted values (uncomment if needed)
 # X_train.plot(label="Original Data")
