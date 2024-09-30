@@ -88,4 +88,3 @@ print(first_order_difference)
 print(second_order_difference)
 
 
-
